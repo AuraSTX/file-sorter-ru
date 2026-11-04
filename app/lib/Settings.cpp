@@ -1,4 +1,5 @@
 #include "Settings.hpp"
+#include "constants.hpp"
 #include "Types.hpp"
 #include "Logger.hpp"
 #include "Language.hpp"
@@ -431,7 +432,7 @@ Settings::Settings()
       default_sort_folder(""),
       sort_folder("")
 {
-    std::string AppName = "AIFileSorter";
+    std::string AppName = APP_NAME_DIR;
     config_path = define_config_path();
 
     config_dir = Utils::utf8_to_path(config_path).parent_path();
@@ -793,7 +794,7 @@ void Settings::save_custom_api_endpoints()
 
 std::string Settings::define_config_path()
 {
-    std::string AppName = "AIFileSorter";
+    std::string AppName = APP_NAME_DIR;
     // All paths are kept as UTF-8 std::string; never use ANSI (…A) Win32 APIs or
     // std::getenv for user paths, because profile folders may contain Cyrillic etc.
     if (const auto override_root = Utils::getenv_utf8("AI_FILE_SORTER_CONFIG_DIR")) {

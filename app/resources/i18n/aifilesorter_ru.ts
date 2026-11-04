@@ -970,7 +970,7 @@ Supports: Nvidia (CUDA), Apple (Metal), CPU.</source>
     <context>
         <name>MainApp</name>
         <message>
-            <location filename="../../lib/MainApp.cpp" line="+723" />
+            <location filename="../../lib/MainApp.cpp" line="+730" />
             <source>File Explorer</source>
             <translation>Проводник</translation>
         </message>
@@ -996,12 +996,12 @@ Supports: Nvidia (CUDA), Apple (Metal), CPU.</source>
         </message>
         <message>
             <location line="+559" />
-            <location line="+1126" />
+            <location line="+1131" />
             <source>Analysis cancelled</source>
             <translation>Анализ отменён</translation>
         </message>
         <message>
-            <location line="-1055" />
+            <location line="-1060" />
             <source>Folder selected: %1</source>
             <translation>Выбрана папка: %1</translation>
         </message>
@@ -1064,12 +1064,12 @@ Supports: Nvidia (CUDA), Apple (Metal), CPU.</source>
         </message>
         <message>
             <location line="+1" />
-            <location line="+856" />
+            <location line="+861" />
             <source>Ready</source>
             <translation>Готово</translation>
         </message>
         <message>
-            <location line="-575" />
+            <location line="-580" />
             <source>Install Compatibility Support</source>
             <translation>Установить поддержку совместимости</translation>
         </message>
@@ -1186,7 +1186,7 @@ Supports: Nvidia (CUDA), Apple (Metal), CPU.</source>
             <translation>Установить расширение для Проводника Windows...</translation>
         </message>
         <message>
-            <location line="+46" />
+            <location line="+51" />
             <source>Install Windows Explorer Extension?</source>
             <translation>Установить расширение для Проводника Windows?</translation>
         </message>
@@ -1327,7 +1327,7 @@ Please open this link manually:
             <translation>[ОЧЕРЕДЬ] Элементы, ожидающие распределения:</translation>
         </message>
         <message>
-            <location line="+274" />
+            <location line="+280" />
             <source>Switch image analysis to CPU?</source>
             <translation>Переключить анализ изображений на ЦП?</translation>
         </message>
@@ -1401,7 +1401,7 @@ Please open this link manually:
             <translation>Сбросить обученное поведение?</translation>
         </message>
         <message>
-            <location line="-1965" />
+            <location line="-1976" />
             <source>Loaded backend: OpenAI API</source>
             <translation>Загружен бэкенд: OpenAI API</translation>
         </message>
@@ -1436,7 +1436,7 @@ Please open this link manually:
             <translation>Загружен CPU-бэкенд: ЦП с %1</translation>
         </message>
         <message>
-            <location line="+1142" />
+            <location line="+1147" />
             <source>Thank you for using AI File Sorter! You have categorized %1 files thus far. I, the author, really hope this app has been useful for you.</source>
             <translation>Спасибо, что пользуетесь AI File Sorter! Вы уже распределили файлов: %1. Я, автор, очень надеюсь, что приложение оказалось вам полезным.</translation>
         </message>
@@ -1446,7 +1446,7 @@ Please open this link manually:
             <translation>На AI File Sorter уходят сотни часов разработки, новых функций, ответов пользователям и постоянные расходы. Если приложение экономит вам время или приносит пользу, пожалуйста, поддержите его, чтобы оно продолжало развиваться.</translation>
         </message>
         <message>
-            <location line="+462" />
+            <location line="+468" />
             <source>Test mode</source>
             <translation>Тестовый режим</translation>
         </message>
@@ -1580,12 +1580,17 @@ Expected broad categories:
             <translation>О программе %1</translation>
         </message>
         <message>
-            <location line="+41" />
+            <location line="+36" />
+            <source>Unofficial fork of AI File Sorter by hyperfield, with a Russian interface and Cyrillic path support. Not affiliated with or endorsed by the original author.&lt;br&gt;&lt;br&gt;Source code: &lt;a href="%1"&gt;%1&lt;/a&gt;</source>
+            <translation>Неофициальный форк программы AI File Sorter (автор оригинала — hyperfield) с русским интерфейсом и поддержкой кириллицы. Не связан с автором оригинала и не одобрен им.&lt;br&gt;&lt;br&gt;Исходный код: &lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
+        </message>
+        <message>
+            <location line="+24" />
             <source>About</source>
             <translation>О программе</translation>
         </message>
         <message>
-            <location line="+29" />
+            <location line="+36" />
             <source>Credits</source>
             <translation>Благодарности</translation>
         </message>
@@ -1600,7 +1605,12 @@ Expected broad categories:
             <translation>О лицензии AGPL</translation>
         </message>
         <message>
-            <location line="+5" />
+            <location line="+7" />
+            <source>%1 is a modified version of AI File Sorter and is distributed under the GNU Affero General Public License v3.0.&lt;br&gt;&lt;br&gt;You can access the full source code of this version at &lt;a href="%2"&gt;%2&lt;/a&gt;.&lt;br&gt;&lt;br&gt;A full copy of the license is provided with this application and available online at &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;gnu.org&lt;/a&gt;.</source>
+            <translation>%1 — изменённая версия программы AI File Sorter, распространяется под лицензией GNU Affero General Public License v3.0.&lt;br&gt;&lt;br&gt;Полный исходный код этой версии доступен на &lt;a href="%2"&gt;%2&lt;/a&gt;.&lt;br&gt;&lt;br&gt;Полный текст лицензии поставляется вместе с приложением и доступен на сайте &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;gnu.org&lt;/a&gt;.</translation>
+        </message>
+        <message>
+            <location line="+11" />
             <source>AI File Sorter is distributed under the GNU Affero General Public License v3.0.&lt;br&gt;&lt;br&gt;You can access the full source code at &lt;a href="https://github.com/hyperfield/ai-file-sorter"&gt;github.com/hyperfield/ai-file-sorter&lt;/a&gt;.&lt;br&gt;&lt;br&gt;A full copy of the license is provided with this application and available online at &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;gnu.org&lt;/a&gt;.</source>
             <translation>AI File Sorter распространяется под лицензией GNU Affero General Public License v3.0.&lt;br&gt;&lt;br&gt;Полный исходный код доступен на &lt;a href="https://github.com/hyperfield/ai-file-sorter"&gt;github.com/hyperfield/ai-file-sorter&lt;/a&gt;.&lt;br&gt;&lt;br&gt;Полный текст лицензии поставляется вместе с приложением и доступен на сайте &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;gnu.org&lt;/a&gt;.</translation>
         </message>
@@ -2051,7 +2061,7 @@ Expected broad categories:
             <translation>Локальная LLM</translation>
         </message>
         <message>
-            <location filename="../../lib/MainApp.cpp" line="-610" />
+            <location filename="../../lib/MainApp.cpp" line="-616" />
             <source>Support %1</source>
             <translation>Поддержать %1</translation>
         </message>
@@ -2082,7 +2092,7 @@ Expected broad categories:
             <translation>Доступно необязательное обновление. Обновить сейчас?</translation>
         </message>
         <message>
-            <location filename="../../lib/MainApp.cpp" line="+851" />
+            <location filename="../../lib/MainApp.cpp" line="+857" />
             <location filename="../../lib/Updater.cpp" line="-193" />
             <source>What's new in version %1:</source>
             <translation>Что нового в версии %1:</translation>
@@ -2459,7 +2469,7 @@ Please update to continue. If you choose to quit, the application will close.</s
     <context>
         <name>UiTranslator</name>
         <message>
-            <location filename="../../lib/UiTranslator.cpp" line="+32" />
+            <location filename="../../lib/UiTranslator.cpp" line="+33" />
             <source>&amp;File</source>
             <translation>&amp;Файл</translation>
         </message>
@@ -2689,12 +2699,17 @@ Please update to continue. If you choose to quit, the application will close.</s
             <translation>&amp;Русский</translation>
         </message>
         <message>
-            <location line="+2" />
+            <location line="+3" />
+            <source>&amp;About File Sorter RU</source>
+            <translation>&amp;О программе File Sorter RU</translation>
+        </message>
+        <message>
+            <location line="+3" />
             <source>&amp;About AI File Sorter</source>
             <translation>&amp;О программе AI File Sorter</translation>
         </message>
         <message>
-            <location line="+4" />
+            <location line="+5" />
             <source>About &amp;Qt</source>
             <translation>О &amp;Qt</translation>
         </message>
@@ -3011,7 +3026,7 @@ Please update to continue. If you choose to quit, the application will close.</s
             <translation>&amp;Вопросы и ответы</translation>
         </message>
         <message>
-            <location line="-17" />
+            <location line="-22" />
             <source>&amp;Hindi</source>
             <translation>&amp;Хинди</translation>
         </message>

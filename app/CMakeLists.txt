@@ -25,6 +25,38 @@ set(AI_FILE_SORTER_STORAGE_PLUGIN_CATALOG_URL
     CACHE STRING
     "Default remote storage plugin catalog URL baked into the application build.")
 
+# ---------------------------------------------------------------------------
+# Fork branding (file-sorter-ru).
+# The upstream project's trademark policy (TRADEMARKS.md) does not allow
+# distributing modified builds under the "AI File Sorter" name/logo, so the
+# application targets of this fork are rebranded. Tests keep upstream behavior.
+# ---------------------------------------------------------------------------
+option(AI_FILE_SORTER_FORK_BUILD "Build the rebranded file-sorter-ru fork application" ON)
+set(AIFS_FORK_APP_NAME "File Sorter RU")
+set(AIFS_FORK_APP_DIR_NAME "FileSorterRU")
+set(AIFS_FORK_INSTANCE_ID "io.github.aurastx.FileSorterRU")
+set(AIFS_FORK_SOURCE_URL "https://github.com/AuraSTX/file-sorter-ru")
+set(AIFS_FORK_VERSION_SUFFIX "-ru.1")
+if(AI_FILE_SORTER_FORK_BUILD)
+    # The fork must never auto-update to the upstream build.
+    set(AI_FILE_SORTER_UPDATE_MODE "DISABLED" CACHE STRING
+        "Updater behavior for this build: PLATFORM_DEFAULT, AUTO_INSTALL, NOTIFY_ONLY, or DISABLED" FORCE)
+    message(STATUS "Fork build: ${AIFS_FORK_APP_NAME} (updater disabled)")
+endif()
+
+function(aifs_apply_fork_branding target_name)
+    if(NOT AI_FILE_SORTER_FORK_BUILD)
+        return()
+    endif()
+    target_compile_definitions(${target_name} PRIVATE
+        AI_FILE_SORTER_FORK_BUILD=1
+        "AI_FILE_SORTER_APP_NAME=\"${AIFS_FORK_APP_NAME}\""
+        "AI_FILE_SORTER_APP_DIR_NAME=\"${AIFS_FORK_APP_DIR_NAME}\""
+        "AI_FILE_SORTER_INSTANCE_ID=\"${AIFS_FORK_INSTANCE_ID}\""
+        "AI_FILE_SORTER_SOURCE_URL=\"${AIFS_FORK_SOURCE_URL}\""
+        "AI_FILE_SORTER_VERSION_SUFFIX=\"${AIFS_FORK_VERSION_SUFFIX}\"")
+endfunction()
+
 set(_aifs_effective_update_mode "${AI_FILE_SORTER_UPDATE_MODE}")
 if(_aifs_effective_update_mode STREQUAL "PLATFORM_DEFAULT")
     if(WIN32)
@@ -712,6 +744,7 @@ endif()
 
 aifs_apply_update_mode(aifilesorter)
 aifs_apply_windows_utf8_manifest(aifilesorter)
+aifs_apply_fork_branding(aifilesorter)
 
 target_include_directories(aifilesorter PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
@@ -849,6 +882,7 @@ set(AIFS_HELP_RESOURCE_FILES
 
 set(AIFS_WHATS_NEW_RESOURCE_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/resources/whats_new/1.9.2.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/resources/whats_new/1.9.2_ru.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/resources/whats_new/1.9.1.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/resources/whats_new/1.9.1_da.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/resources/whats_new/1.9.1_de.md"
@@ -1133,6 +1167,7 @@ if(WIN32 AND _aifs_windows_enable_starter)
     )
     aifs_apply_update_mode(${STARTER_TARGET})
     aifs_apply_windows_utf8_manifest(${STARTER_TARGET})
+    aifs_apply_fork_branding(${STARTER_TARGET})
     target_include_directories(${STARTER_TARGET} PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
     )
@@ -1318,6 +1353,15 @@ if(WIN32)
         set(APP_VER_PATCH "0")
     endif()
 
+    if(AI_FILE_SORTER_FORK_BUILD)
+        set(AIFS_RC_COMPANY "file-sorter-ru contributors")
+        set(AIFS_RC_PRODUCT "${AIFS_FORK_APP_NAME}")
+        set(AIFS_RC_ORIGINAL "FileSorterRU.exe")
+    else()
+        set(AIFS_RC_COMPANY "hyperfield")
+        set(AIFS_RC_PRODUCT "AI File Sorter")
+        set(AIFS_RC_ORIGINAL "AIFileSorter.exe")
+    endif()
     configure_file(
         "${CMAKE_CURRENT_SOURCE_DIR}/resources/windows/version.rc.in"
         "${CMAKE_CURRENT_BINARY_DIR}/generated/version.rc"

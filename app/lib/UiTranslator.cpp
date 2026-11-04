@@ -1,5 +1,6 @@
 #include "UiTranslator.hpp"
 
+#include "AppInfo.hpp"
 #include "Language.hpp"
 #include "CategoryLanguage.hpp"
 #include "MenuMnemonicController.hpp"
@@ -91,8 +92,13 @@ constexpr auto kActionSpanish = QT_TRANSLATE_NOOP("UiTranslator", "&Spanish");
 constexpr auto kActionTurkish = QT_TRANSLATE_NOOP("UiTranslator", "&Turkish");
 constexpr auto kActionKorean = QT_TRANSLATE_NOOP("UiTranslator", "&Korean");
 constexpr auto kActionRussian = QT_TRANSLATE_NOOP("UiTranslator", "&Russian");
+#ifdef AI_FILE_SORTER_FORK_BUILD
+constexpr auto kActionAboutAiFileSorter =
+    QT_TRANSLATE_NOOP("UiTranslator", "&About File Sorter RU");
+#else
 constexpr auto kActionAboutAiFileSorter =
     QT_TRANSLATE_NOOP("UiTranslator", "&About AI File Sorter");
+#endif
 constexpr auto kActionQuickStartGuide =
     QT_TRANSLATE_NOOP("UiTranslator", "&Quick Start Guide");
 constexpr auto kActionFaq = QT_TRANSLATE_NOOP("UiTranslator", "&FAQ");
@@ -187,7 +193,7 @@ void UiTranslator::retranslate_all(const State& state) const
 
 void UiTranslator::translate_window_title() const
 {
-    deps_.window.setWindowTitle(QStringLiteral("AI File Sorter"));
+    deps_.window.setWindowTitle(app_display_name());
 }
 
 void UiTranslator::translate_primary_controls(bool analysis_in_progress) const

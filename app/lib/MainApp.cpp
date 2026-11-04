@@ -313,6 +313,13 @@ bool paid_explorer_extension_suppresses_support_prompt(Settings& settings) {
 void maybe_show_support_prompt(Settings& settings,
                                bool& prompt_active,
                                std::function<MainApp::SupportPromptResult(int)> show_prompt) {
+#ifdef AI_FILE_SORTER_FORK_BUILD
+    // The donation reminder is written in the upstream author's voice ("I, the author")
+    // and validates upstream donation codes; the fork does not show it.
+    (void)settings;
+    (void)show_prompt;
+    return;
+#endif
     if (prompt_active) {
         return;
     }
@@ -2362,6 +2369,11 @@ void MainApp::record_categorized_metrics(int count)
 
 void MainApp::maybe_show_windows_explorer_extension_install_prompt()
 {
+#ifdef AI_FILE_SORTER_FORK_BUILD
+    // The Explorer extension is a separate product of the upstream author that
+    // launches the official app; it is not offered by the fork build.
+    return;
+#endif
     if (test_mode_ || windows_explorer_extension_prompt_active_) {
         return;
     }

@@ -657,7 +657,7 @@ void MainAppUiBuilder::build_menus(MainApp& app) {
     build_edit_menu(app);
     build_view_menu(app);
     build_settings_menu(app);
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(AI_FILE_SORTER_FORK_BUILD)
     build_extensions_menu(app);
 #endif
     if (app.is_development_mode()) {

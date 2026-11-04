@@ -1,4 +1,5 @@
 #include "SingleInstanceCoordinator.hpp"
+#include "constants.hpp"
 
 #include <QCryptographicHash>
 #include <QDir>
@@ -17,7 +18,7 @@ QString normalized_instance_id(QString instance_id)
 {
     instance_id = instance_id.trimmed();
     if (instance_id.isEmpty()) {
-        instance_id = QStringLiteral("dev.hfstudio.AIFileSorter");
+        instance_id = QString::fromUtf8(APP_INSTANCE_ID);
     }
     return instance_id;
 }

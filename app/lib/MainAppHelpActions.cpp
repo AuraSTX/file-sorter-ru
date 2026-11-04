@@ -169,12 +169,30 @@ void MainAppHelpActions::show_about(QWidget* parent)
     program_name->setAlignment(Qt::AlignHCenter);
     about_layout->addWidget(program_name);
 
+#ifdef AI_FILE_SORTER_FORK_BUILD
+    const QString version_text = QStringLiteral("Version: %1%2")
+        .arg(QString::fromStdString(APP_VERSION.to_string()),
+             QStringLiteral(AI_FILE_SORTER_VERSION_SUFFIX));
+#else
     const QString version_text =
         QStringLiteral("Version: %1").arg(QString::fromStdString(APP_VERSION.to_string()));
+#endif
     auto* version_label = new QLabel(version_text, about_tab);
     version_label->setAlignment(Qt::AlignHCenter);
     about_layout->addWidget(version_label);
 
+#ifdef AI_FILE_SORTER_FORK_BUILD
+    auto* fork_label = new QLabel(QObject::tr(
+        "Unofficial fork of AI File Sorter by hyperfield, with a Russian interface and "
+        "Cyrillic path support. Not affiliated with or endorsed by the original author."
+        "<br><br>Source code: <a href=\"%1\">%1</a>")
+        .arg(QStringLiteral(AI_FILE_SORTER_SOURCE_URL)), about_tab);
+    fork_label->setTextFormat(Qt::RichText);
+    fork_label->setOpenExternalLinks(true);
+    fork_label->setWordWrap(true);
+    fork_label->setAlignment(Qt::AlignHCenter);
+    about_layout->addWidget(fork_label);
+#else
     auto* copyright_label =
         new QLabel(QStringLiteral("Copyright 2026 HF Studio. All rights reserved."), about_tab);
     copyright_label->setAlignment(Qt::AlignHCenter);
@@ -185,6 +203,7 @@ void MainAppHelpActions::show_about(QWidget* parent)
     website_label->setOpenExternalLinks(true);
     website_label->setAlignment(Qt::AlignHCenter);
     about_layout->addWidget(website_label);
+#endif
 
     about_layout->addStretch(1);
     tabs->addTab(about_tab, QObject::tr("About"));
@@ -194,6 +213,8 @@ void MainAppHelpActions::show_about(QWidget* parent)
     auto* credits_layout = new QVBoxLayout(credits_tab);
     credits_layout->setSpacing(8);
 
+#ifndef AI_FILE_SORTER_FORK_BUILD
+    // The upstream author's brand logo is not shown in the rebranded fork build.
     if (QPixmap brand_logo_pix(QStringLiteral(":/dev/hfstudio/AIFileSorter/images/hf_logo.png"));
         !brand_logo_pix.isNull()) {
         auto* brand_logo = new QLabel(credits_tab);
@@ -202,8 +223,13 @@ void MainAppHelpActions::show_about(QWidget* parent)
             brand_logo_pix.scaled(160, 160, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         credits_layout->addWidget(brand_logo);
     }
+#endif
 
+#ifdef AI_FILE_SORTER_FORK_BUILD
+    auto* author_label = new QLabel(QStringLiteral("Original author: hyperfield"), credits_tab);
+#else
     auto* author_label = new QLabel(QStringLiteral("Author: hyperfield"), credits_tab);
+#endif
     author_label->setAlignment(Qt::AlignHCenter);
     credits_layout->addWidget(author_label);
 
@@ -255,6 +281,19 @@ void MainAppHelpActions::show_agpl_info(QWidget* parent)
 
     auto* layout = new QVBoxLayout(&dialog);
 
+#ifdef AI_FILE_SORTER_FORK_BUILD
+    // AGPL: a modified version must point users to its own corresponding source.
+    auto* summary = new QLabel(QObject::tr(
+        "%1 is a modified version of AI File Sorter and is distributed under the "
+        "GNU Affero General Public License v3.0."
+        "<br><br>"
+        "You can access the full source code of this version at "
+        "<a href=\"%2\">%2</a>."
+        "<br><br>"
+        "A full copy of the license is provided with this application and available online at "
+        "<a href=\"https://www.gnu.org/licenses/agpl-3.0.html\">gnu.org</a>.")
+        .arg(app_display_name(), QStringLiteral(AI_FILE_SORTER_SOURCE_URL)), &dialog);
+#else
     auto* summary = new QLabel(QObject::tr(
         "AI File Sorter is distributed under the GNU Affero General Public License v3.0."
         "<br><br>"
@@ -263,6 +302,7 @@ void MainAppHelpActions::show_agpl_info(QWidget* parent)
         "<br><br>"
         "A full copy of the license is provided with this application and available online at "
         "<a href=\"https://www.gnu.org/licenses/agpl-3.0.html\">gnu.org</a>."), &dialog);
+#endif
     summary->setTextFormat(Qt::RichText);
     summary->setOpenExternalLinks(true);
     summary->setWordWrap(true);

@@ -90,7 +90,18 @@ AI File Sorter может работать полностью на вашем у
 
 ## Где взять программу
 
-Готовых сборок этого форка пока нет — её нужно собрать из исходников (см. [Сборка в Windows](#сборка-в-windows)).
+**Windows 10/11 x64:** скачайте установщик или портативный ZIP со страницы **[Releases](https://github.com/AuraSTX/file-sorter-ru/releases/latest)**.
+
+- `FileSorterRU-<версия>-setup.exe` — установщик на русском: ярлыки в меню «Пуск», удаление через «Параметры → Приложения», автоматическая установка Visual C++ Runtime.
+- `FileSorterRU-<версия>-portable.zip` — без установки: распакуйте и запустите `aifilesorter.exe`.
+
+Сборка форка называется **File Sorter RU** (название и логотип оригинала по его правилам нельзя использовать для изменённых сборок) и отличается от оригинала так:
+
+- настройки и кэш хранятся отдельно — в `%APPDATA%\FileSorterRU`, поэтому форк не мешает установленному оригиналу; скачанные модели общие (`%APPDATA%\aifilesorter\llms`) и подхватываются автоматически;
+- **автообновление отключено**, чтобы программа не «обновилась» до оригинала без русского языка и исправлений;
+- нет пунктов, относящихся к сервисам автора оригинала: платного расширения для Проводника и напоминаний о пожертвованиях.
+
+Для ускорения на видеокарте NVIDIA нужен установленный [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) (библиотеки CUDA в сборку не входят); без него программа работает на процессоре.
 Официальные сборки оригинала доступны на [SourceForge](https://sourceforge.net/projects/ai-file-sorter/files/latest/download) и в [Microsoft Store](https://apps.microsoft.com/detail/9npk4dzd6r6s), но **исправлений кириллицы и русского интерфейса в них нет**.
 
 <p align="center">
@@ -393,7 +404,9 @@ cmake --build external\libzip\build --config Release
 - Если хотите CPU-вариант с OpenBLAS (быстрее на процессоре), установите OpenBLAS через MSYS2 (`pacman -S mingw-w64-ucrt-x86_64-openblas`) и уберите `blas=off`.
 - Альтернатива с Qt из официального установщика описана в [README.en.md](README.en.md#windows).
 
-> Программа использует ту же папку настроек, что и установленная оригинальная версия (`%APPDATA%\AIFileSorter`). Не держите обе запущенными одновременно — приложение работает в одном экземпляре.
+> В этой ветке по умолчанию включён флаг `AI_FILE_SORTER_FORK_BUILD`: программа собирается под именем **File Sorter RU**, с отдельной папкой настроек `%APPDATA%\FileSorterRU` и без автообновления. Чтобы собрать программу под исходным именем (например, для pull request в оригинал), добавьте `-DAI_FILE_SORTER_FORK_BUILD=OFF`.
+>
+> Установщик собирается [Inno Setup 6](https://jrsoftware.org/isinfo.php) по скрипту `installer/FileSorterRU.iss` (см. [installer/README.md](installer/README.md)).
 
 ## Сборка в Linux и macOS
 
@@ -446,7 +459,7 @@ $env:QT_QPA_PLATFORM = "minimal"
 ```powershell
 python tests\live_llm\headless_live_llm_tests.py `
   --app app\build-windows\Release\aifilesorter.exe `
-  --model "$env:APPDATA\AIFileSorter\llms\gemma-3-4b-it\model.gguf" `
+  --model "$env:APPDATA\aifilesorter\llms\gemma-3-4b-it\model.gguf" `
   --backend cuda `
   --only russian `
   --skip-downloads
@@ -533,7 +546,7 @@ AI File Sorter хранит в папке настроек два вида ло�
 
 - **Пакет Debian/Ubuntu**: `sudo apt remove aifilesorter`
 - **Сборка из исходников в Linux/macOS**: `cd app && sudo make uninstall`
-- **Windows (сборка этого форка)**: удалите папку сборки. Настройки и модели лежат в `%APPDATA%\AIFileSorter` — удалите её, если они больше не нужны.
+- **Windows (установщик этого форка)**: «Параметры → Приложения → File Sorter RU → Удалить». Настройки лежат в `%APPDATA%\FileSorterRU`, скачанные модели — в `%APPDATA%\aifilesorter\llms`; удалите их вручную, если они больше не нужны.
 
 ---
 
@@ -574,7 +587,7 @@ AI File Sorter хранит в папке настроек два вида ло�
 - **Linux:** `./app/scripts/collect_linux_diagnostics.sh`
 - **macOS:** `./app/scripts/collect_macos_diagnostics.sh`
 
-Скрипт собирает журналы, скрывает типичные личные пути и упаковывает всё в zip. Журналы программы в Windows лежат в `%APPDATA%\AIFileSorter\logs`. Подробнее — [TROUBLESHOOTING.md](TROUBLESHOOTING.md) и [app/scripts/README.md](app/scripts/README.md).
+Скрипт собирает журналы, скрывает типичные личные пути и упаковывает всё в zip. Журналы программы в Windows лежат в `%APPDATA%\FileSorterRU\logs` (у оригинала — `%APPDATA%\AIFileSorter\logs`). Подробнее — [TROUBLESHOOTING.md](TROUBLESHOOTING.md) и [app/scripts/README.md](app/scripts/README.md).
 
 ---
 

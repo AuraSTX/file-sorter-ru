@@ -1,4 +1,5 @@
 #include "AppInfo.hpp"
+#include "constants.hpp"
 #include "AppTheme.hpp"
 #include "AppTestRunner.hpp"
 #include "EmbeddedEnv.hpp"
@@ -778,8 +779,8 @@ int run_application(const ParsedArguments& parsed_args)
                      [&app]() { AppTheme::apply_windows_runtime_theme(app); });
 #endif
     const QString instance_id = parsed_args.test_mode
-        ? QStringLiteral("dev.hfstudio.AIFileSorter.Test")
-        : QStringLiteral("dev.hfstudio.AIFileSorter");
+        ? QString::fromUtf8(APP_INSTANCE_ID) + QStringLiteral(".Test")
+        : QString::fromUtf8(APP_INSTANCE_ID);
     SingleInstanceCoordinator instance_guard(instance_id);
     const QString startup_command = startup_command_from_arguments(parsed_args);
     instance_guard.set_activation_message(startup_command);

@@ -1,4 +1,5 @@
 #include "Utils.hpp"
+#include "constants.hpp"
 #include "Logger.hpp"
 #include "TestHooks.hpp"
 #include "WindowsCudaProbe.hpp"
@@ -237,7 +238,7 @@ std::optional<std::filesystem::path> packaged_local_cache_root()
 
 std::filesystem::path user_writable_app_data_dir()
 {
-    constexpr const char* kAppName = "AIFileSorter";
+    constexpr const char* kAppName = APP_NAME_DIR;
     if (const auto override_root = Utils::getenv_utf8("AI_FILE_SORTER_CONFIG_DIR")) {
         return Utils::utf8_to_path(*override_root) / kAppName;
     }
